@@ -38,7 +38,7 @@ const Third = () => {
   };
 
   const isBookOpen = currentPage > 0 && currentPage < pageCount;
-  const bookTransform = isBookOpen ? 'translateX(12%) rotateX(10deg)' : 'rotateX(10deg)';
+  const bookTransform = isBookOpen ? 'translateX(50%) rotateX(10deg)' : 'rotateX(10deg)';
 
   const pages = [
     { front: { type: 'cover', title: 'Happy New Year!', subtitle: 'A Special Book Just for You Baby💋❤️' }, back: { title: 'A Wish For You... ✨', text: 'On this special day🥹💋, I wish you a life full of happiness and all your beautiful dreams coming true.' }},
@@ -60,11 +60,10 @@ const Third = () => {
         .third-page {  
           margin: 0;  
           display: flex;  
-          flex-direction: column;
-          align-items: flex-start;
+          align-items: center;
           justify-content: center;
           min-height: 100vh;  
-          perspective: 2500px;  
+          perspective: 2200px;  
           overflow: hidden;  
           background-color: #feecea;  
           background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent);  
@@ -98,11 +97,9 @@ const Third = () => {
 
         .book {  
           position: relative;  
-          margin: 0;  
-          width: clamp(280px, 42vmin, 350px);
-          height: clamp(380px, 58vmin, 480px);
-          max-width: 85vw;
-          max-height: 82vh;
+          margin: auto;  
+          width: 45vmin;        /* PERFECT SIZE FROM YOUR HTML */
+          height: 60vmin;       /* PERFECT SIZE FROM YOUR HTML */
           transform-style: preserve-3d;  
           transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);  
           cursor: pointer;  
@@ -114,7 +111,7 @@ const Third = () => {
           transform-style: preserve-3d;  
           transform-origin: left center;  
           transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);  
-          box-shadow: 0.5em 0.5em 1.5em rgba(0,0,0,0.15);  
+          box-shadow: 0em 0.5em 1.5em -0.2em rgba(0,0,0,0.3);  
           border-radius: 0.25em 1em 1em 0.25em;  
         }  
           
@@ -128,49 +125,47 @@ const Third = () => {
           justify-content: center;  
           align-items: center;  
           text-align: center;  
+          padding: 2em;
         }  
 
-        .front {   
-          padding: 1.5em 1.5em 1.5em 3em;
-          border-radius: 0.25em 1em 1em 0.25em;   
-        }
-        
-        .back-page {   
-          padding: 1.5em 3em 1.5em 1.5em;
-          transform: rotateY(180deg);   
-          border-radius: 1em 0.25em 0.25em 1em;   
-        }  
+        .front { border-radius: 0.25em 1em 1em 0.25em; }  
+        .back-page { border-radius: 1em 0.25em 0.25em 1em; transform: rotateY(180deg); }  
           
-        .front.has-image { padding: 0; }  
+        .front.has-image, .back-page.has-image { padding: 0; }  
         .front.has-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 0.25em 1em 1em 0.25em; }  
 
         .cover {  
           background: linear-gradient(135deg, #f43d67, #ff7882);  
           color: #fff;  
-          padding: 2em 2em 2em 3.5em !important;
+          border: 2px solid rgba(255,255,255,0.5);
         }  
 
         .cover h1 {  
           font-family: 'Titan One', sans-serif;  
-          font-size: clamp(1.4em, 3.5vw, 2.2em);  
+          font-size: clamp(2.5em, 5vw, 3.5em);  
+          text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
         }  
+
+        .cover p {  
+          font-family: 'Sriracha', cursive;  
+          font-size: 1.2em;  
+          text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
+        }
 
         h2 {  
           font-family: 'Sriracha', cursive;  
-          font-size: clamp(1.1em, 2.5vw, 1.3em);  
+          font-size: clamp(1.5em, 3vw, 2em);  
           color: #ff7882;  
-          width: 100%;  
-          padding: 0 1em;
+          margin-bottom: 0.5em;
         }  
 
         .page-text {  
           font-family: 'Zeyada', cursive;  
-          font-size: clamp(1em, 2.2vw, 1.25em);  
-          line-height: 1.3;  
+          font-size: clamp(1.4em, 2.5vw, 1.8em);  
+          line-height: 1.4;  
           color: #333;  
-          margin-top: 0.5em;  
-          padding: 0 1.5em;
-        }  
+          margin-bottom: 0.8em;
+        }
 
         .tap-hint {  
           position: fixed;  
@@ -184,15 +179,6 @@ const Third = () => {
           border-radius: 20px;  
           box-shadow: 0 2px 10px rgba(0,0,0,0.1);  
           z-index: 100;
-        }
-
-        @media (max-width: 480px) {
-          .book {
-            width: 82vw !important;
-            height: 75vh !important;
-          }
-          .front { padding-left: 3.2em !important; }
-          .back-page { padding-right: 3.2em !important; }
         }
       `}</style>  
 

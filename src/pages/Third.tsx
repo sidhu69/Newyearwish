@@ -98,8 +98,8 @@ const Third = () => {
         .book {  
           position: relative;  
           margin: auto;  
-          width: 45vmin;        /* PERFECT SIZE FROM YOUR HTML */
-          height: 60vmin;       /* PERFECT SIZE FROM YOUR HTML */
+          width: 45vmin;  
+          height: 60vmin;  
           transform-style: preserve-3d;  
           transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);  
           cursor: pointer;  
@@ -125,7 +125,7 @@ const Third = () => {
           justify-content: center;  
           align-items: center;  
           text-align: center;  
-          padding: 2em;
+          padding: 1.8em; /* Slightly reduced padding */
         }  
 
         .front { border-radius: 0.25em 1em 1em 0.25em; }  
@@ -142,29 +142,29 @@ const Third = () => {
 
         .cover h1 {  
           font-family: 'Titan One', sans-serif;  
-          font-size: clamp(2.5em, 5vw, 3.5em);  
+          font-size: clamp(1.8em, 4vw, 2.5em); /* SMALLER than HTML */
           text-shadow: 2px 2px 0px rgba(0,0,0,0.2);
         }  
 
         .cover p {  
           font-family: 'Sriracha', cursive;  
-          font-size: 1.2em;  
+          font-size: 0.95em; /* SMALLER than HTML */
           text-shadow: 1px 1px 1px rgba(0,0,0,0.2);
         }
 
         h2 {  
           font-family: 'Sriracha', cursive;  
-          font-size: clamp(1.5em, 3vw, 2em);  
+          font-size: clamp(1.1em, 2.2vw, 1.5em); /* SMALLER than HTML */
           color: #ff7882;  
-          margin-bottom: 0.5em;
+          margin-bottom: 0.4em;
         }  
 
         .page-text {  
           font-family: 'Zeyada', cursive;  
-          font-size: clamp(1.4em, 2.5vw, 1.8em);  
-          line-height: 1.4;  
+          font-size: clamp(1em, 1.8vw, 1.3em); /* SMALLER than HTML */
+          line-height: 1.35; /* Tighter line height */
           color: #333;  
-          margin-bottom: 0.8em;
+          margin-bottom: 0.6em;
         }
 
         .tap-hint {  
@@ -179,6 +179,7 @@ const Third = () => {
           border-radius: 20px;  
           box-shadow: 0 2px 10px rgba(0,0,0,0.1);  
           z-index: 100;
+          font-size: 0.9em;
         }
       `}</style>  
 

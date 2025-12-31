@@ -9,7 +9,7 @@ const Third = () => {
     const container = document.querySelector('.floating-hearts-book');
     if (container) {
       for (let i = 0; i < 30; i++) {
-        const heart = document.createElement('i');
+        const heart profiler = document.createElement('i');
         heart.className = 'fa-solid fa-heart';
         heart.style.left = `${Math.random() * 100}%`;
         heart.style.animationDelay = `${Math.random() * 10}s`;
@@ -24,6 +24,7 @@ const Third = () => {
     if (!bookRef.current) return;
     const rect = bookRef.current.getBoundingClientRect();
     let clickX: number;
+
     if ('touches' in e) {
       clickX = e.touches[0].clientX - rect.left;
     } else {
@@ -38,8 +39,11 @@ const Third = () => {
   };
 
   const isBookOpen = currentPage > 0 && currentPage < pageCount;
-  // This shifts the book further right when open so the left page is visible
-  const bookTransform = isBookOpen ? `translateX(35%) rotateX(10deg)` : `rotateX(10deg)`;
+
+  // 🔒 Stable transform: no off-screen movement when closed
+  const bookTransform = isBookOpen
+    ? `translateX(-22%) rotateX(10deg)`
+    : `rotateX(10deg)`;
 
   const pages = [
     { front: { type: 'cover', title: 'Happy New Year!', subtitle: 'A Special Book Just for You Baby💋❤️' }, back: { title: 'A Wish For You... ✨', text: 'On this special day🥹💋, I wish you a life full of happiness and all your beautiful dreams coming true.' }},
@@ -56,17 +60,17 @@ const Third = () => {
     <>
       <link href="https://fonts.googleapis.com/css2?family=Zeyada&family=Sriracha&family=Titan+One&display=swap" rel="stylesheet" />
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-      
+
       <style>{`
         .third-page {
-          margin: 0;
           display: flex;
+          justify-content: flex-end;
+          align-items: center;
+          padding-right: 6vw;
           min-height: 100vh;
           perspective: 2500px;
           overflow: hidden;
           background-color: #feecea;
-          background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent);
-          background-size: 80px 80px;
         }
 
         .floating-hearts-book i {
@@ -84,26 +88,25 @@ const Third = () => {
 
         .book {
           position: relative;
-          margin: auto;
-          width: 50vmin; 
+          width: 50vmin;
           height: 65vmin;
           transform-style: preserve-3d;
+          transform-origin: 60% center; /* prevents left text clipping */
           transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer;
-          /* Important: Anchor point for the shift */
-          left: -5vmin; 
         }
 
         .page {
           position: absolute;
           inset: 0;
+          left: 0.7em; /* 🔑 FIX: prevents left-side text cutoff */
           transform-style: preserve-3d;
           transform-origin: left center;
           transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
           box-shadow: 0.5em 0.5em 1.5em rgba(0,0,0,0.15);
           border-radius: 0.25em 1em 1em 0.25em;
         }
-        
+
         .front, .back-page {
           position: absolute;
           inset: 0;
@@ -116,64 +119,31 @@ const Third = () => {
           text-align: center;
         }
 
-        /* Added specific padding to prevent text hitting the spine */
-        .front { 
-            padding: 1.5em 1.5em 1.5em 2.5em; 
-            border-radius: 0.25em 1em 1em 0.25em; 
-        }
-        .back-page { 
-            padding: 1.5em 2.5em 1.5em 1.5em; 
-            transform: rotateY(180deg); 
-            border-radius: 1em 0.25em 0.25em 1em; 
-        }
-        
-        .front.has-image { padding: 0; }
-        .front.has-image img { width: 100%; height: 100%; object-fit: cover; }
-
-        .cover {
-          background: linear-gradient(135deg, #f43d67, #ff7882);
-          color: #fff;
-          padding: 1.5em !important;
+        .front {
+          padding: 1.5em 1.5em 1.5em 3.5em;
         }
 
-        .cover h1 {
-          font-family: 'Titan One', sans-serif;
-          font-size: clamp(1.4em, 3.5vw, 2.2em);
+        .back-page {
+          padding: 1.5em 3.5em 1.5em 1.5em;
+          transform: rotateY(180deg);
         }
 
-        h2 {
-          font-family: 'Sriracha', cursive;
-          font-size: clamp(1.1em, 2.5vw, 1.3em);
-          color: #ff7882;
+        .front.has-image {
+          padding: 0;
+        }
+
+        .front.has-image img {
           width: 100%;
-        }
-
-        .page-text {
-          font-family: 'Zeyada', cursive;
-          font-size: clamp(1em, 2.2vw, 1.25em);
-          line-height: 1.3;
-          color: #333;
-          margin-top: 0.5em;
-        }
-
-        .tap-hint {
-          position: fixed;
-          bottom: 25px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-family: 'Sriracha', cursive;
-          color: #ff7882;
-          background: rgba(255,255,255,0.9);
-          padding: 8px 16px;
-          border-radius: 20px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+          height: 100%;
+          object-fit: cover;
         }
       `}</style>
 
       <div className="third-page">
         <div className="floating-hearts-book"></div>
-        <div 
-          className="book" 
+
+        <div
+          className="book"
           ref={bookRef}
           style={{ transform: bookTransform }}
           onClick={handleBookClick}
@@ -182,7 +152,7 @@ const Third = () => {
           {pages.map((page, index) => {
             const isFlipped = index < currentPage;
             return (
-              <div 
+              <div
                 key={index}
                 className="page"
                 style={{
@@ -190,33 +160,17 @@ const Third = () => {
                   zIndex: isFlipped ? index : pageCount - index
                 }}
               >
-                <div className={`front ${page.front.type === 'cover' || page.front.type === 'backcover' ? 'cover' : ''} ${page.front.type === 'image' ? 'has-image' : ''}`}>
-                  {page.front.type === 'cover' && (
-                    <>
-                      <h1>{page.front.title}</h1>
-                      <p>{page.front.subtitle}</p>
-                    </>
-                  )}
-                  {page.front.type === 'image' && <img src={page.front.src} alt="" draggable="false" />}
+                <div className={`front ${page.front.type === 'image' ? 'has-image' : ''}`}>
+                  {page.front.type === 'image' && <img src={page.front.src} draggable={false} />}
                 </div>
-                <div className={`back-page ${page.back.type === 'backcover' ? 'cover' : ''}`}>
-                  {page.back.type === 'backcover' ? (
-                    <>
-                      <h1>{page.back.title}</h1>
-                      <p>{page.back.subtitle}</p>
-                    </>
-                  ) : (
-                    <>
-                      <h2>{page.back.title}</h2>
-                      <p className="page-text">{page.back.text}</p>
-                    </>
-                  )}
+                <div className="back-page">
+                  <h2>{page.back.title}</h2>
+                  <p>{page.back.text}</p>
                 </div>
               </div>
             );
           })}
         </div>
-        <div className="tap-hint">👆 Tap edges to flip</div>
       </div>
     </>
   );

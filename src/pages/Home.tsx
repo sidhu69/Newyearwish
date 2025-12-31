@@ -6,16 +6,13 @@ const navigate = useNavigate();
 const [showMail, setShowMail] = useState(false);
 
 useEffect(() => {
-// Load external scripts
 const script = document.createElement('script');
 script.src = 'https://code.jquery.com/jquery-3.7.1.min.js';
 script.async = true;
 document.body.appendChild(script);
-
 return () => {  
   document.body.removeChild(script);  
 };
-
 }, []);
 
 const handleMailClick = () => setShowMail(true);
@@ -41,30 +38,11 @@ return (
       touch-action: pan-y;  
     }  
 
-    .flag__birthday {  
-      display: flex;  
-      justify-content: space-between;  
-      animation: translateYFlag 1.5s 0.5s forwards;  
-      transform: translateY(-200px);  
-    }  
-      
-    @keyframes translateYFlag {  
-      to { transform: translateY(-10px); }  
-    }  
-
-    .flag__birthday .flag__left {  
-      transform: rotate(-10deg) translate(-20px, 30px);  
-    }  
-      
-    .flag__birthday .flag__right {  
-      transform: rotate(10deg) translate(20px, 30px) scaleX(-1);  
-    }  
-
     .content {  
       width: 100%;  
       position: relative;  
       display: flex;  
-      padding-top: 2rem;  
+      padding-top: 5rem;  /* Added more padding since flags are gone */
       flex-wrap: wrap;  
     }  
 
@@ -153,37 +131,6 @@ return (
       object-fit: cover;  
     }  
 
-    .balloon_one, .balloon_two {  
-      position: absolute;  
-      width: 80px;  
-    }  
-
-    .balloon_one {  
-      top: -70px;  
-      left: -70px;  
-      animation: balloon1 2s infinite linear;  
-    }  
-
-    .balloon_two {  
-      top: 170px;  
-      right: -65px;  
-      z-index: -1;  
-      transform: rotate(10deg);  
-      animation: balloon2 2s infinite linear;  
-    }  
-
-    @keyframes balloon1 {  
-      0%, 50%, 100% { transform: rotate(0deg); }  
-      25% { transform: rotate(3deg); }  
-      75% { transform: rotate(-3deg); }  
-    }  
-
-    @keyframes balloon2 {  
-      0%, 50%, 100% { transform: rotate(10deg); }  
-      25% { transform: rotate(7deg); }  
-      75% { transform: rotate(13deg); }  
-    }  
-
     #btn__letter {  
       position: relative;  
       margin-top: 30px;  
@@ -220,16 +167,10 @@ return (
     @media (max-width: 768px) {  
       .content { flex-direction: column; padding-top: 1rem; }  
       .content .left, .content .right { width: 100%; padding: 10px; }  
-      .flag__birthday img { width: 80px; }  
     }  
   `}</style>  
 
   <div className="home-page">  
-    <div className="flag__birthday">  
-      <img className="flag__left" src="/flag.png" alt="flag" style={{ width: '100px' }} />  
-      <img className="flag__right" src="/flag.png" alt="flag" style={{ width: '100px' }} />  
-    </div>  
-
     <div className="content">  
       <div className="left">  
         <div className="title">  
@@ -244,22 +185,19 @@ return (
           onClick={handleMailClick}  
           onTouchEnd={(e) => { e.preventDefault(); handleMailClick(); }}  
         >  
-          click here bby🥹💋 <i className="fa-solid fa-heart"></i>  
+          Open New Year Letter <i className="fa-solid fa-heart"></i>  
         </button>  
       </div>  
 
       <div className="right">  
         <div className="box__account">  
-          <img className="balloon_one" src="/images/balloon1.png" alt="balloon" />  
           <div className="image">  
-            <img src="/profile.jpg" alt="Birthday Person" />  
+            <img src="/profile.jpg" alt="Person" />  
           </div>  
-          <img className="balloon_two" src="/images/balloon2.png" alt="balloon" />  
         </div>  
       </div>  
     </div>  
 
-    {/* Mail Modal */}  
     {showMail && (  
       <div   
         style={{  
@@ -281,8 +219,8 @@ return (
             padding: '40px',  
             maxWidth: '600px',  
             width: '90%',  
-            maxHeight: '85vh',  // Limits height so it stays on screen
-            overflowY: 'auto',  // Enables vertical scrolling
+            maxHeight: '85vh',  
+            overflowY: 'auto',  
             border: '5px solid #333',  
             fontFamily: "'Dancing Script', cursive",  
             textAlign: 'center',  
@@ -292,7 +230,6 @@ return (
         >  
           <button  
             onClick={handleCloseMail}  
-            onTouchEnd={(e) => { e.preventDefault(); handleCloseMail(); }}  
             style={{  
               position: 'absolute',  
               top: '10px',  
@@ -303,7 +240,7 @@ return (
               border: '3px solid #333',  
               background: '#fff',  
               cursor: 'pointer',  
-              zIndex: 10,
+              zIndex: 10,  
               fontSize: '1.5rem',  
               display: 'flex',  
               justifyContent: 'center',  
@@ -320,7 +257,7 @@ return (
             margin: '0 auto 20px',  
             border: '4px solid #ff7882'  
           }}>  
-            <img src="/profile.jpg" alt="Birthday Person" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />  
+            <img src="/profile.jpg" alt="Person" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />  
           </div>  
           <h3 style={{ fontSize: '2rem', color: '#ff7882', marginBottom: '10px' }}>Happy New Year Baby💋! 🎉</h3>  
           <p style={{ fontSize: '1.3rem', lineHeight: '1.6', color: '#333', marginBottom: '10px' }}>  
@@ -331,7 +268,6 @@ return (
           </p>  
           <button  
             onClick={handleNextPage}  
-            onTouchEnd={(e) => { e.preventDefault(); handleNextPage(); }}  
             style={{  
               marginTop: '25px',  
               padding: '12px 30px',  
@@ -342,8 +278,7 @@ return (
               backgroundColor: '#ff7882',  
               border: '3px solid #333',  
               borderRadius: '50px',  
-              cursor: 'pointer',  
-              touchAction: 'manipulation'  
+              cursor: 'pointer'  
             }}  
           >  
             Continue →  
@@ -353,7 +288,6 @@ return (
     )}  
   </div>  
 </>
-
 );
 };
 

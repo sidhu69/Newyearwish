@@ -7,14 +7,14 @@ const Second = () => {
 
   useEffect(() => {
     const notesData = [
-      { image: "/8.png", text: "And once again... Happy Birthday, yaar! Enjoy every moment of your day." },
-      { image: "/7.png", text: "Honestly, I really wish tumhe boht achievements mile iss year❤️" },
-      { image: "/1.png", text: "You may not know this, but even if my day goes completely wrong, just one small conversation with you makes it feel right again." },
-      { image: "/5.png", text: "Your presence has this quiet magic — it makes everything feel better." },
-      { image: "/4.png", text: "You're truly the best girl I've ever come across." },
-      { image: "/3.png", text: "Just remember — you'll always be my favourite person." },
-      { image: "/2.png", text: "You have such a beautiful and kind soul — inside and out." },
-      { image: "/6.png", text: "Your smile is honestly the cutest thing I've ever seen." }
+      { image: "/8.png", text: "And once again... Happy New year baby I love uh soo muchhh tu boht special hai mere liye🥹💋." },
+      { image: "/7.png", text: "Honestly, I really wish tumhe boht achievements mile iss year🥹❤️.." },
+      { image: "/1.png", text: "You may not know this, but even if my day goes completely wrong, just one small conversation with you makes it feel right again.💋" },
+      { image: "/5.png", text: "Pyari bachiii teri aankho mein toh jadoo hai kya hi kehne unhke🥹💋 swarg se utri paree lagti ho jannat🥹💋." },
+      { image: "/4.png", text: "You're truly the best andd most beautifull girl I've ever come across😋🥹." },
+      { image: "/3.png", text: "Bas yaad rakhna mai gusse mein kitna hi bhadak jau par mai kabhi bura nhi chahunga tera😭" },
+      { image: "/2.png", text: "Boht pyari hai tuuu sorry mai kitni galtiya krta hu gaaliya bakdeta hu I knw par ksm se boht close hai tu mere 🫠💋❤️" },
+      { image: "/6.png", text: "Your smile is honestly the cutest thing I've ever seen🥹 Ly💋." }
     ];
 
     let highestZ = 5;
@@ -263,7 +263,7 @@ const Second = () => {
       `}</style>
 
       <div className="second-page" ref={containerRef}>
-        <h1 className="main-title">A Few Notes For You ❤️</h1>
+        <h1 className="main-title">A Few Notes For You Baby💋❤️</h1>
         
         <div className="particles"></div>
         <div className="floating-hearts-second"></div>

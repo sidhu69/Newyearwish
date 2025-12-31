@@ -233,10 +233,10 @@ const Home = () => {
           <div className="left">
             <div className="title">
               <div className="happy">Happy</div>
-              <div className="birthday">Birthday!</div>
+              <div className="birthday">New Year💋!</div>
             </div>
             <div className="date__of__birth">
-              <span>🎂 Your Special Day! 🎂</span>
+              <span> Special day😋💋 </span>
             </div>
             <button 
               id="btn__letter" 
@@ -318,11 +318,12 @@ const Home = () => {
               }}>
                 <img src="/profile.jpg" alt="Birthday Person" style={{ width: '100%', height: '100%', objectFit: 'cover' }} />
               </div>
-              <h3 style={{ fontSize: '2rem', color: '#ff7882', marginBottom: '10px' }}>Happy Birthday! 🎉</h3>
+              <h3 style={{ fontSize: '2rem', color: '#ff7882', marginBottom: '10px' }}>Happy New Year Baby💋! 🎉</h3>
               <p style={{ fontSize: '1.3rem', lineHeight: '1.6', color: '#333' }}>
-                On your special day, I just want to say how incredibly grateful I am to have you in my life. 
-                You make every moment brighter and every day more meaningful. 
-                May this year bring you endless happiness, success, and all the love you deserve! ❤️
+                Mai boht khush hu 2026 ki starting mein hi mere paas itni sundar pyari aur susheel ladki hai😋💋, 
+                I just want to say how lucky I am to have a beatifullll bestie like you in my life😋💋 tu boht
+                pyarii hai🥹 sabse pyari hai tuuuuu as you know terese sundar ladki toh maine kabhi dekhi hi nhi😭💋 
+                May this year bring you endless happiness, success, and all the love you deserve! babe💋❤️
               </p>
               <button
                 onClick={handleNextPage}

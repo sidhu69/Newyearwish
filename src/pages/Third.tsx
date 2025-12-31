@@ -38,8 +38,7 @@ const Third = () => {
   };
 
   const isBookOpen = currentPage > 0 && currentPage < pageCount;
-  // Fixed: Center closed book, shift right only when open for left page visibility
-  const bookTransform = isBookOpen ? 'translateX(25%) rotateX(10deg)' : 'rotateX(10deg)';
+  const bookTransform = isBookOpen ? 'translateX(12%) rotateX(10deg)' : 'rotateX(10deg)';
 
   const pages = [
     { front: { type: 'cover', title: 'Happy New Year!', subtitle: 'A Special Book Just for You Baby💋❤️' }, back: { title: 'A Wish For You... ✨', text: 'On this special day🥹💋, I wish you a life full of happiness and all your beautiful dreams coming true.' }},
@@ -62,7 +61,7 @@ const Third = () => {
           margin: 0;  
           display: flex;  
           flex-direction: column;
-          align-items: center;
+          align-items: flex-start;
           justify-content: center;
           min-height: 100vh;  
           perspective: 2500px;  
@@ -99,11 +98,11 @@ const Third = () => {
 
         .book {  
           position: relative;  
-          margin: 0 auto; /* Fixed: True centering */
-          width: clamp(300px, 50vmin, 400px); /* Responsive width */
-          height: clamp(400px, 65vmin, 520px); /* Responsive height */
-          max-width: 90vw;
-          max-height: 90vh;
+          margin: 0;  
+          width: clamp(280px, 42vmin, 350px);
+          height: clamp(380px, 58vmin, 480px);
+          max-width: 85vw;
+          max-height: 82vh;
           transform-style: preserve-3d;  
           transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);  
           cursor: pointer;  
@@ -132,12 +131,12 @@ const Third = () => {
         }  
 
         .front {   
-          padding: 1.5em 1.5em 1.5em 3.5em; /* Increased left padding for text visibility */
+          padding: 1.5em 1.5em 1.5em 3em;
           border-radius: 0.25em 1em 1em 0.25em;   
         }
         
         .back-page {   
-          padding: 1.5em 3.5em 1.5em 1.5em; /* Increased right padding */
+          padding: 1.5em 3em 1.5em 1.5em;
           transform: rotateY(180deg);   
           border-radius: 1em 0.25em 0.25em 1em;   
         }  
@@ -148,7 +147,7 @@ const Third = () => {
         .cover {  
           background: linear-gradient(135deg, #f43d67, #ff7882);  
           color: #fff;  
-          padding: 2em 2em 2em 4em !important; /* Extra padding for cover text */
+          padding: 2em 2em 2em 3.5em !important;
         }  
 
         .cover h1 {  
@@ -189,11 +188,11 @@ const Third = () => {
 
         @media (max-width: 480px) {
           .book {
-            width: 85vw !important;
+            width: 82vw !important;
             height: 75vh !important;
           }
-          .front { padding-left: 4em !important; }
-          .back-page { padding-right: 4em !important; }
+          .front { padding-left: 3.2em !important; }
+          .back-page { padding-right: 3.2em !important; }
         }
       `}</style>  
 

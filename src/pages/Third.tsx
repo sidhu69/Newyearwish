@@ -24,26 +24,22 @@ const Third = () => {
     if (!bookRef.current) return;
     const rect = bookRef.current.getBoundingClientRect();
     let clickX: number;
-
     if ('touches' in e) {
       clickX = e.touches[0].clientX - rect.left;
     } else {
       clickX = e.clientX - rect.left;
     }
 
-    if (clickX < rect.width / 2) {
-      setCurrentPage(prev => Math.max(0, prev - 1));
-    } else {
-      setCurrentPage(prev => Math.min(pageCount, prev + 1));
+    if (clickX < rect.width / 2) {  
+      setCurrentPage(prev => Math.max(0, prev - 1));  
+    } else {  
+      setCurrentPage(prev => Math.min(pageCount, prev + 1));  
     }
   };
 
   const isBookOpen = currentPage > 0 && currentPage < pageCount;
-
-  // ✅ FIX 2: stable closed position (no off-screen movement)
-  const bookTransform = isBookOpen
-    ? `translateX(-22%) rotateX(10deg)`
-    : `rotateX(10deg)`;
+  // Fixed: Center closed book, shift right only when open for left page visibility
+  const bookTransform = isBookOpen ? 'translateX(25%) rotateX(10deg)' : 'rotateX(10deg)';
 
   const pages = [
     { front: { type: 'cover', title: 'Happy New Year!', subtitle: 'A Special Book Just for You Baby💋❤️' }, back: { title: 'A Wish For You... ✨', text: 'On this special day🥹💋, I wish you a life full of happiness and all your beautiful dreams coming true.' }},
@@ -62,150 +58,193 @@ const Third = () => {
       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
       <style>{`
-        .third-page {
-          margin: 0;
-          display: flex;
-          justify-content: flex-end;
-          align-items: center;
-          padding-right: 6vw;
-          min-height: 100vh;
-          perspective: 2500px;
-          overflow: hidden;
-          background-color: #feecea;
-          background-image:
-            linear-gradient(0deg, transparent 24%, rgba(255,255,255,0.8) 25%, rgba(255,255,255,0.8) 26%, transparent 27%, transparent 74%, rgba(255,255,255,0.8) 75%, rgba(255,255,255,0.8) 76%, transparent 77%, transparent),
-            linear-gradient(90deg, transparent 24%, rgba(255,255,255,0.8) 25%, rgba(255,255,255,0.8) 26%, transparent 27%, transparent 74%, rgba(255,255,255,0.8) 75%, rgba(255,255,255,0.8) 76%, transparent 77%, transparent);
-          background-size: 80px 80px;
-        }
-
-        .floating-hearts-book i {
-          position: absolute;
-          bottom: -80px;
-          color: #f43d67;
-          animation: float linear infinite;
-        }
-
-        @keyframes float {
-          0% { transform: translateY(0); opacity: 0; }
-          10% { opacity: 0.8; }
-          100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }
-        }
-
-        .book {
-          position: relative;
-          width: 50vmin;
-          height: 65vmin;
-          transform-style: preserve-3d;
-          transform-origin: 60% center; /* ✅ FIX 1 */
-          transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
-          cursor: pointer;
-        }
-
-        .page {
-          position: absolute;
-          inset: 0;
-          left: 0.6em; /* ✅ FIX 1 */
-          transform-style: preserve-3d;
-          transform-origin: left center;
-          transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
-          box-shadow: 0.5em 0.5em 1.5em rgba(0,0,0,0.15);
-          border-radius: 0.25em 1em 1em 0.25em;
-        }
-
-        .front, .back-page {
-          position: absolute;
-          inset: 0;
-          backface-visibility: hidden;
-          background-color: #fffafc;
-          display: flex;
+        .third-page {  
+          margin: 0;  
+          display: flex;  
           flex-direction: column;
-          justify-content: center;
           align-items: center;
-          text-align: center;
+          justify-content: center;
+          min-height: 100vh;  
+          perspective: 2500px;  
+          overflow: hidden;  
+          background-color: #feecea;  
+          background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent);  
+          background-size: 80px 80px;  
+          padding: 20px;
+          box-sizing: border-box;
+        }  
+
+        .floating-hearts-book {  
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          pointer-events: none;
+          z-index: 1;
         }
 
-        .front {
-          padding: 1.5em 1.5em 1.5em 3.5em; /* ✅ FIX 1 */
+        .floating-hearts-book i {  
+          position: absolute;  
+          bottom: -80px;  
+          color: #f43d67;  
+          animation: float linear infinite;  
+        }  
+
+        @keyframes float {  
+          0% { transform: translateY(0); opacity: 0; }  
+          10% { opacity: 0.8; }  
+          100% { transform: translateY(-100vh) rotate(720deg); opacity: 0; }  
+        }  
+
+        .book {  
+          position: relative;  
+          margin: 0 auto; /* Fixed: True centering */
+          width: clamp(300px, 50vmin, 400px); /* Responsive width */
+          height: clamp(400px, 65vmin, 520px); /* Responsive height */
+          max-width: 90vw;
+          max-height: 90vh;
+          transform-style: preserve-3d;  
+          transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);  
+          cursor: pointer;  
+        }  
+
+        .page {  
+          position: absolute;  
+          inset: 0;  
+          transform-style: preserve-3d;  
+          transform-origin: left center;  
+          transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);  
+          box-shadow: 0.5em 0.5em 1.5em rgba(0,0,0,0.15);  
+          border-radius: 0.25em 1em 1em 0.25em;  
+        }  
+          
+        .front, .back-page {  
+          position: absolute;  
+          inset: 0;  
+          backface-visibility: hidden;  
+          background-color: #fffafc;  
+          display: flex;  
+          flex-direction: column;  
+          justify-content: center;  
+          align-items: center;  
+          text-align: center;  
+        }  
+
+        .front {   
+          padding: 1.5em 1.5em 1.5em 3.5em; /* Increased left padding for text visibility */
+          border-radius: 0.25em 1em 1em 0.25em;   
+        }
+        
+        .back-page {   
+          padding: 1.5em 3.5em 1.5em 1.5em; /* Increased right padding */
+          transform: rotateY(180deg);   
+          border-radius: 1em 0.25em 0.25em 1em;   
+        }  
+          
+        .front.has-image { padding: 0; }  
+        .front.has-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 0.25em 1em 1em 0.25em; }  
+
+        .cover {  
+          background: linear-gradient(135deg, #f43d67, #ff7882);  
+          color: #fff;  
+          padding: 2em 2em 2em 4em !important; /* Extra padding for cover text */
+        }  
+
+        .cover h1 {  
+          font-family: 'Titan One', sans-serif;  
+          font-size: clamp(1.4em, 3.5vw, 2.2em);  
+        }  
+
+        h2 {  
+          font-family: 'Sriracha', cursive;  
+          font-size: clamp(1.1em, 2.5vw, 1.3em);  
+          color: #ff7882;  
+          width: 100%;  
+          padding: 0 1em;
+        }  
+
+        .page-text {  
+          font-family: 'Zeyada', cursive;  
+          font-size: clamp(1em, 2.2vw, 1.25em);  
+          line-height: 1.3;  
+          color: #333;  
+          margin-top: 0.5em;  
+          padding: 0 1.5em;
+        }  
+
+        .tap-hint {  
+          position: fixed;  
+          bottom: 25px;  
+          left: 50%;  
+          transform: translateX(-50%);  
+          font-family: 'Sriracha', cursive;  
+          color: #ff7882;  
+          background: rgba(255,255,255,0.9);  
+          padding: 8px 16px;  
+          border-radius: 20px;  
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);  
+          z-index: 100;
         }
 
-        .back-page {
-          padding: 1.5em 3.5em 1.5em 1.5em; /* ✅ FIX 1 */
-          transform: rotateY(180deg);
+        @media (max-width: 480px) {
+          .book {
+            width: 85vw !important;
+            height: 75vh !important;
+          }
+          .front { padding-left: 4em !important; }
+          .back-page { padding-right: 4em !important; }
         }
+      `}</style>  
 
-        .front.has-image { padding: 0; }
-        .front.has-image img { width: 100%; height: 100%; object-fit: cover; }
-
-        .cover {
-          background: linear-gradient(135deg, #f43d67, #ff7882);
-          color: #fff;
-        }
-
-        .tap-hint {
-          position: fixed;
-          bottom: 25px;
-          left: 50%;
-          transform: translateX(-50%);
-          font-family: 'Sriracha', cursive;
-          color: #ff7882;
-          background: rgba(255,255,255,0.9);
-          padding: 8px 16px;
-          border-radius: 20px;
-          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-      `}</style>
-
-      <div className="third-page">
-        <div className="floating-hearts-book"></div>
-
-        <div
-          className="book"
-          ref={bookRef}
-          style={{ transform: bookTransform }}
-          onClick={handleBookClick}
-          onTouchEnd={handleBookClick}
-        >
-          {pages.map((page, index) => {
-            const isFlipped = index < currentPage;
-            return (
-              <div
-                key={index}
-                className="page"
-                style={{
-                  transform: `rotateY(${isFlipped ? -180 : 0}deg)`,
-                  zIndex: isFlipped ? index : pageCount - index
-                }}
-              >
-                <div className={`front ${page.front.type === 'image' ? 'has-image' : 'cover'}`}>
-                  {page.front.type === 'cover' && (
-                    <>
-                      <h1>{page.front.title}</h1>
-                      <p>{page.front.subtitle}</p>
-                    </>
-                  )}
-                  {page.front.type === 'image' && <img src={page.front.src} draggable={false} />}
-                </div>
-
-                <div className={`back-page ${page.back.type === 'backcover' ? 'cover' : ''}`}>
-                  {page.back.type === 'backcover' ? (
-                    <>
-                      <h1>{page.back.title}</h1>
-                      <p>{page.back.subtitle}</p>
-                    </>
-                  ) : (
-                    <>
-                      <h2>{page.back.title}</h2>
-                      <p className="page-text">{page.back.text}</p>
-                    </>
-                  )}
-                </div>
-              </div>
-            );
-          })}
-        </div>
-
-        <div className="tap-hint">👆 Tap edges to flip</div>
-      </div>
+      <div className="third-page">  
+        <div className="floating-hearts-book"></div>  
+        <div   
+          className="book"   
+          ref={bookRef}  
+          style={{ transform: bookTransform }}  
+          onClick={handleBookClick}  
+          onTouchEnd={handleBookClick}  
+        >  
+          {pages.map((page, index) => {  
+            const isFlipped = index < currentPage;  
+            return (  
+              <div   
+                key={index}  
+                className="page"  
+                style={{  
+                  transform: `rotateY(${isFlipped ? -180 : 0}deg)`,  
+                  zIndex: isFlipped ? index : pageCount - index  
+                }}  
+              >  
+                <div className={`front ${page.front.type === 'cover' || page.front.type === 'backcover' ? 'cover' : ''} ${page.front.type === 'image' ? 'has-image' : ''}`}>  
+                  {page.front.type === 'cover' && (  
+                    <>  
+                      <h1>{page.front.title}</h1>  
+                      <p>{page.front.subtitle}</p>  
+                    </>  
+                  )}  
+                  {page.front.type === 'image' && <img src={page.front.src} alt="" draggable="false" />}  
+                </div>  
+                <div className={`back-page ${page.back.type === 'backcover' ? 'cover' : ''}`}>  
+                  {page.back.type === 'backcover' ? (  
+                    <>  
+                      <h1>{page.back.title}</h1>  
+                      <p>{page.back.subtitle}</p>  
+                    </>  
+                  ) : (  
+                    <>  
+                      <h2>{page.back.title}</h2>  
+                      <p className="page-text">{page.back.text}</p>  
+                    </>  
+                  )}  
+                </div>  
+              </div>  
+            );  
+          })}  
+        </div>  
+        <div className="tap-hint">👆 Tap edges to flip</div>  
+      </div>  
     </>
   );
 };

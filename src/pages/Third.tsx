@@ -22,10 +22,8 @@ const Third = () => {
 
   const handleBookClick = (e: React.MouseEvent | React.TouchEvent) => {
     if (!bookRef.current) return;
-    
     const rect = bookRef.current.getBoundingClientRect();
     let clickX: number;
-    
     if ('touches' in e) {
       clickX = e.touches[0].clientX - rect.left;
     } else {
@@ -40,8 +38,8 @@ const Third = () => {
   };
 
   const isBookOpen = currentPage > 0 && currentPage < pageCount;
-  // Reduced translateX from 50% to 25% so it stays more centered
-  const bookTransform = isBookOpen ? `translateX(25%) rotateX(10deg)` : `rotateX(10deg)`;
+  // This shifts the book further right when open so the left page is visible
+  const bookTransform = isBookOpen ? `translateX(35%) rotateX(10deg)` : `rotateX(10deg)`;
 
   const pages = [
     { front: { type: 'cover', title: 'Happy New Year!', subtitle: 'A Special Book Just for You Baby💋❤️' }, back: { title: 'A Wish For You... ✨', text: 'On this special day🥹💋, I wish you a life full of happiness and all your beautiful dreams coming true.' }},
@@ -64,7 +62,7 @@ const Third = () => {
           margin: 0;
           display: flex;
           min-height: 100vh;
-          perspective: 2200px;
+          perspective: 2500px;
           overflow: hidden;
           background-color: #feecea;
           background-image: linear-gradient(0deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent), linear-gradient(90deg, transparent 24%, rgba(255, 255, 255, 0.8) 25%, rgba(255, 255, 255, 0.8) 26%, transparent 27%, transparent 74%, rgba(255, 255, 255, 0.8) 75%, rgba(255, 255, 255, 0.8) 76%, transparent 77%, transparent);
@@ -87,11 +85,13 @@ const Third = () => {
         .book {
           position: relative;
           margin: auto;
-          width: 55vmin; /* Increased width */
-          height: 70vmin; /* Increased height */
+          width: 50vmin; 
+          height: 65vmin;
           transform-style: preserve-3d;
-          transition: transform 0.8s ease-in-out;
+          transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer;
+          /* Important: Anchor point for the shift */
+          left: -5vmin; 
         }
 
         .page {
@@ -100,7 +100,7 @@ const Third = () => {
           transform-style: preserve-3d;
           transform-origin: left center;
           transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
-          box-shadow: 0.5em 0.5em 1.5em rgba(0,0,0,0.2);
+          box-shadow: 0.5em 0.5em 1.5em rgba(0,0,0,0.15);
           border-radius: 0.25em 1em 1em 0.25em;
         }
         
@@ -113,40 +113,52 @@ const Third = () => {
           flex-direction: column;
           justify-content: center;
           align-items: center;
-          padding: 1.5em; /* Adjusted padding */
           text-align: center;
         }
 
-        .back-page { transform: rotateY(180deg); border-radius: 1em 0.25em 0.25em 1em; }
+        /* Added specific padding to prevent text hitting the spine */
+        .front { 
+            padding: 1.5em 1.5em 1.5em 2.5em; 
+            border-radius: 0.25em 1em 1em 0.25em; 
+        }
+        .back-page { 
+            padding: 1.5em 2.5em 1.5em 1.5em; 
+            transform: rotateY(180deg); 
+            border-radius: 1em 0.25em 0.25em 1em; 
+        }
         
+        .front.has-image { padding: 0; }
         .front.has-image img { width: 100%; height: 100%; object-fit: cover; }
 
         .cover {
           background: linear-gradient(135deg, #f43d67, #ff7882);
           color: #fff;
+          padding: 1.5em !important;
         }
 
         .cover h1 {
           font-family: 'Titan One', sans-serif;
-          font-size: clamp(1.5em, 4vw, 2.5em); /* Slightly smaller */
+          font-size: clamp(1.4em, 3.5vw, 2.2em);
         }
 
         h2 {
           font-family: 'Sriracha', cursive;
-          font-size: clamp(1.1em, 2.5vw, 1.4em); /* Smaller title */
+          font-size: clamp(1.1em, 2.5vw, 1.3em);
           color: #ff7882;
+          width: 100%;
         }
 
         .page-text {
           font-family: 'Zeyada', cursive;
-          font-size: clamp(1.1em, 2.2vw, 1.4em); /* Smaller text */
-          line-height: 1.2;
+          font-size: clamp(1em, 2.2vw, 1.25em);
+          line-height: 1.3;
           color: #333;
+          margin-top: 0.5em;
         }
 
         .tap-hint {
           position: fixed;
-          bottom: 20px;
+          bottom: 25px;
           left: 50%;
           transform: translateX(-50%);
           font-family: 'Sriracha', cursive;
@@ -154,6 +166,7 @@ const Third = () => {
           background: rgba(255,255,255,0.9);
           padding: 8px 16px;
           border-radius: 20px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
       `}</style>
 
@@ -164,6 +177,7 @@ const Third = () => {
           ref={bookRef}
           style={{ transform: bookTransform }}
           onClick={handleBookClick}
+          onTouchEnd={handleBookClick}
         >
           {pages.map((page, index) => {
             const isFlipped = index < currentPage;
@@ -183,7 +197,7 @@ const Third = () => {
                       <p>{page.front.subtitle}</p>
                     </>
                   )}
-                  {page.front.type === 'image' && <img src={page.front.src} alt="" />}
+                  {page.front.type === 'image' && <img src={page.front.src} alt="" draggable="false" />}
                 </div>
                 <div className={`back-page ${page.back.type === 'backcover' ? 'cover' : ''}`}>
                   {page.back.type === 'backcover' ? (

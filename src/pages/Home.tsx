@@ -244,7 +244,7 @@ return (
           onClick={handleMailClick}  
           onTouchEnd={(e) => { e.preventDefault(); handleMailClick(); }}  
         >  
-          Open Birthday Letter <i className="fa-solid fa-heart"></i>  
+          click here bby🥹💋 <i className="fa-solid fa-heart"></i>  
         </button>  
       </div>  
 

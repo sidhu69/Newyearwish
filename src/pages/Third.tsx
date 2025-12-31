@@ -44,12 +44,12 @@ const Third = () => {
   const bookTransform = isBookOpen ? `translateX(50%) rotateX(10deg)` : `rotateX(10deg)`;
 
   const pages = [
-    { front: { type: 'cover', title: 'Happy Birthday!', subtitle: 'A Special Book Just for You ❤️' }, back: { title: 'A Wish For You... ✨', text: 'On your special day, I wish you a life full of happiness and all your beautiful dreams coming true.' }},
-    { front: { type: 'image', src: '/2.png' }, back: { title: 'For the Birthday Girl 💖', text: 'May your birthday be as sweet and beautiful as you are. Always remember how special you truly are.' }},
-    { front: { type: 'image', src: '/3.png' }, back: { title: "You're the Best 🥺", text: 'So calm, so real, and always kind. Never ever change — you\'re amazing as you are.' }},
-    { front: { type: 'image', src: '/4.png' }, back: { title: "You're Truly Special ✨", text: "Not everyone has such a good heart. It's honestly a blessing to know someone like you. Have a great birthday, yaar!" }},
-    { front: { type: 'image', src: '/5.png' }, back: { title: 'My Wish for You 💖', text: 'Hope you achieve your alot of goals this year and keep growing with all the love you truly deserve!' }},
-    { front: { type: 'image', src: '/6.png' }, back: { title: 'Before You Go... 💫', text: 'I really wish this year brings you the same joy you give to everyone around you. You deserve it, truly.' }},
+    { front: { type: 'cover', title: 'Happy Birthday!', subtitle: 'A Special Book Just for You Baby💋❤️' }, back: { title: 'A Wish For You... ✨', text: 'On this special day🥹💋, I wish you a life full of happiness and all your beautiful dreams coming true🥹💋.' }},
+    { front: { type: 'image', src: '/2.png' }, back: { title: 'For My Beautifull gurl💋 💖', text: 'I hopee tujhe iss saaal bohttt sari khushiyaa mile aurr hmara rishta aur achha ho jaye❤️' }},
+    { front: { type: 'image', src: '/3.png' }, back: { title: "You're the Best 🫠❤️💋", text: 'Tu meri fav hai you knw tu pyari, sundar, hot, sweet sab hai tu🥹🫠❤️💋. change mt hona — tu\'jaisi hai mast hai😋❤️💋.' }},
+    { front: { type: 'image', src: '/4.png' }, back: { title: "apki cuteness😋❤️ ✨", text: "sach bata rha hu ksm se kabhi tere jaisi sundri ladki nhi dekhiii😭👍 TERI AANKHE UFFF KYA KEHNE UNHKE🥹" }},
+    { front: { type: 'image', src: '/5.png' }, back: { title: 'My Wishes for You 💖', text: 'Hope you achieve your alot of goals this year and keep growing with all the love you truly deserve ;)!' }},
+    { front: { type: 'image', src: '/6.png' }, back: { title: 'Before You Go... 💫', text: 'Meri pyari bestfrienddd mere jigar ka tukda kya hi bolu ab pyari bachi hai tu merii🥹💋💋' }},
     { front: { type: 'image', src: '/profile.jpg' }, back: { title: 'thak toh nhi gyi?😭', text: "AGAIN I LOVE UH SO MUCHH , YOU'RE THE BESTTT UMAH 😭😭😭" }},
     { front: { type: 'image', src: '/1.png' }, back: { type: 'backcover', title: 'With Love', subtitle: 'Always and Forever 💌' }},
   ];

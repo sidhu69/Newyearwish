@@ -9,7 +9,7 @@ const Third = () => {
     const container = document.querySelector('.floating-hearts-book');
     if (container) {
       for (let i = 0; i < 30; i++) {
-        const heart profiler = document.createElement('i');
+        const heart = document.createElement('i');
         heart.className = 'fa-solid fa-heart';
         heart.style.left = `${Math.random() * 100}%`;
         heart.style.animationDelay = `${Math.random() * 10}s`;
@@ -40,7 +40,7 @@ const Third = () => {
 
   const isBookOpen = currentPage > 0 && currentPage < pageCount;
 
-  // 🔒 Stable transform: no off-screen movement when closed
+  // ✅ FIX 2: stable closed position (no off-screen movement)
   const bookTransform = isBookOpen
     ? `translateX(-22%) rotateX(10deg)`
     : `rotateX(10deg)`;
@@ -63,6 +63,7 @@ const Third = () => {
 
       <style>{`
         .third-page {
+          margin: 0;
           display: flex;
           justify-content: flex-end;
           align-items: center;
@@ -71,6 +72,10 @@ const Third = () => {
           perspective: 2500px;
           overflow: hidden;
           background-color: #feecea;
+          background-image:
+            linear-gradient(0deg, transparent 24%, rgba(255,255,255,0.8) 25%, rgba(255,255,255,0.8) 26%, transparent 27%, transparent 74%, rgba(255,255,255,0.8) 75%, rgba(255,255,255,0.8) 76%, transparent 77%, transparent),
+            linear-gradient(90deg, transparent 24%, rgba(255,255,255,0.8) 25%, rgba(255,255,255,0.8) 26%, transparent 27%, transparent 74%, rgba(255,255,255,0.8) 75%, rgba(255,255,255,0.8) 76%, transparent 77%, transparent);
+          background-size: 80px 80px;
         }
 
         .floating-hearts-book i {
@@ -91,7 +96,7 @@ const Third = () => {
           width: 50vmin;
           height: 65vmin;
           transform-style: preserve-3d;
-          transform-origin: 60% center; /* prevents left text clipping */
+          transform-origin: 60% center; /* ✅ FIX 1 */
           transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
           cursor: pointer;
         }
@@ -99,7 +104,7 @@ const Third = () => {
         .page {
           position: absolute;
           inset: 0;
-          left: 0.7em; /* 🔑 FIX: prevents left-side text cutoff */
+          left: 0.6em; /* ✅ FIX 1 */
           transform-style: preserve-3d;
           transform-origin: left center;
           transition: transform 1.2s cubic-bezier(0.65, 0, 0.35, 1);
@@ -120,22 +125,33 @@ const Third = () => {
         }
 
         .front {
-          padding: 1.5em 1.5em 1.5em 3.5em;
+          padding: 1.5em 1.5em 1.5em 3.5em; /* ✅ FIX 1 */
         }
 
         .back-page {
-          padding: 1.5em 3.5em 1.5em 1.5em;
+          padding: 1.5em 3.5em 1.5em 1.5em; /* ✅ FIX 1 */
           transform: rotateY(180deg);
         }
 
-        .front.has-image {
-          padding: 0;
+        .front.has-image { padding: 0; }
+        .front.has-image img { width: 100%; height: 100%; object-fit: cover; }
+
+        .cover {
+          background: linear-gradient(135deg, #f43d67, #ff7882);
+          color: #fff;
         }
 
-        .front.has-image img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover;
+        .tap-hint {
+          position: fixed;
+          bottom: 25px;
+          left: 50%;
+          transform: translateX(-50%);
+          font-family: 'Sriracha', cursive;
+          color: #ff7882;
+          background: rgba(255,255,255,0.9);
+          padding: 8px 16px;
+          border-radius: 20px;
+          box-shadow: 0 2px 10px rgba(0,0,0,0.1);
         }
       `}</style>
 
@@ -160,17 +176,35 @@ const Third = () => {
                   zIndex: isFlipped ? index : pageCount - index
                 }}
               >
-                <div className={`front ${page.front.type === 'image' ? 'has-image' : ''}`}>
+                <div className={`front ${page.front.type === 'image' ? 'has-image' : 'cover'}`}>
+                  {page.front.type === 'cover' && (
+                    <>
+                      <h1>{page.front.title}</h1>
+                      <p>{page.front.subtitle}</p>
+                    </>
+                  )}
                   {page.front.type === 'image' && <img src={page.front.src} draggable={false} />}
                 </div>
-                <div className="back-page">
-                  <h2>{page.back.title}</h2>
-                  <p>{page.back.text}</p>
+
+                <div className={`back-page ${page.back.type === 'backcover' ? 'cover' : ''}`}>
+                  {page.back.type === 'backcover' ? (
+                    <>
+                      <h1>{page.back.title}</h1>
+                      <p>{page.back.subtitle}</p>
+                    </>
+                  ) : (
+                    <>
+                      <h2>{page.back.title}</h2>
+                      <p className="page-text">{page.back.text}</p>
+                    </>
+                  )}
                 </div>
               </div>
             );
           })}
         </div>
+
+        <div className="tap-hint">👆 Tap edges to flip</div>
       </div>
     </>
   );

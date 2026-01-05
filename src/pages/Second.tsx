@@ -7,14 +7,14 @@ const Second = () => {
 
   useEffect(() => {
     const notesData = [
-      { image: "/8.png", text: "And once again... Happy New year baby I love uh soo muchhh tu boht special hai mere liye🥹💋." },
-      { image: "/7.png", text: "Honestly, I really wish tumhe boht achievements mile iss year🥹❤️.." },
-      { image: "/1.png", text: "You may not know this, but even if my day goes completely wrong, just one small conversation with you makes it feel right again.💋" },
-      { image: "/5.png", text: "Pyari bachiii teri aankho mein toh jadoo hai kya hi kehne unhke🥹💋 swarg se utri paree lagti ho jannat🥹💋." },
-      { image: "/4.png", text: "You're truly the best andd most beautifull girl I've ever come across😋🥹." },
-      { image: "/3.png", text: "Bas yaad rakhna mai gusse mein kitna hi bhadak jau par mai kabhi bura nhi chahunga tera😭" },
-      { image: "/2.png", text: "Boht pyari hai tuuu sorry mai kitni galtiya krta hu gaaliya bakdeta hu I knw par ksm se boht close hai tu mere 🫠💋❤️" },
-      { image: "/6.png", text: "Your smile is honestly the cutest thing I've ever seen🥹 Ly💋." }
+      { image: "/8.png", text: "There are so many things I don’t say out loud, but they truly matter ❤️" },
+      { image: "/7.png", text: "Your presence made things easier and safer for me, papa ❤️" },
+      { image: "/1.png", text: "Knowing you were always there gave me confidence I didn’t even realise I had ❤️" },
+      { image: "/5.png", text: "That’s something I’ll always be thankful for, papa ❤️" },
+      { image: "/4.png", text: "Some moments with you stay in my heart forever, papa ❤️" },
+      { image: "/3.png", text: "You’ve guided me, supported me, and helped me grow into a better version of myself ❤️" },
+      { image: "/2.png", text: "I might not say it often, but your love and care mean the world to me ❤️" },
+      { image: "/6.png", text: "Tomorrow is your special day, happy birthday papa! Wishing you lots of happiness and love ❤️" }
     ];
 
     let highestZ = 5;
@@ -24,7 +24,6 @@ const Second = () => {
       isHolding: boolean = false;
       offsetX: number = 0;
       offsetY: number = 0;
-      hoverInterval: NodeJS.Timeout | null = null;
 
       constructor(paperElement: HTMLElement) {
         this.paper = paperElement;
@@ -68,7 +67,6 @@ const Second = () => {
       end() { this.isHolding = false; }
     }
 
-    // Create papers
     notesData.forEach((note, index) => {
       const paperDiv = document.createElement('div');
       paperDiv.className = 'paper';
@@ -89,7 +87,6 @@ const Second = () => {
       new Paper(paperDiv);
     });
 
-    // Create floating hearts
     const createFloatingHearts = () => {
       const container = document.querySelector('.floating-hearts-second');
       if (!container) return;
@@ -105,7 +102,6 @@ const Second = () => {
     };
     createFloatingHearts();
 
-    // Create particle hearts
     const createParticles = () => {
       const container = document.querySelector('.particles');
       if (!container) return;
@@ -263,7 +259,7 @@ const Second = () => {
       `}</style>
 
       <div className="second-page" ref={containerRef}>
-        <h1 className="main-title">A Few Notes For You Baby💋❤️</h1>
+        <h1 className="main-title">A Few Notes For You Papa ❤️</h1>
         
         <div className="particles"></div>
         <div className="floating-hearts-second"></div>

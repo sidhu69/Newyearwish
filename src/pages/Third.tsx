@@ -41,15 +41,68 @@ const Third = () => {
   const bookTransform = isBookOpen ? 'translateX(50%) rotateX(10deg)' : 'rotateX(10deg)';
 
   const pages = [
-    { front: { type: 'cover', title: 'Happy New Year!', subtitle: 'A Special Book Just for You Baby💋❤️' }, back: { title: 'A Wish For You... ✨', text: 'On this special day🥹💋, I wish you a life full of happiness and all your beautiful dreams coming true.' }},
-    { front: { type: 'image', src: '/2.png' }, back: { title: 'For My Beauty💋 💖', text: 'I hopee tujhe iss saaal bohttt sari khushiyaa mile aurr hmara rishta aur achha ho jaye❤️' }},
-    { front: { type: 'image', src: '/3.png' }, back: { title: "You're the Best 🫠❤️", text: 'Tu meri fav hai you knw tu pyari, sundar, hot, sweet sab hai tu🥹🫠❤️💋. change mt hona.' }},
-    { front: { type: 'image', src: '/4.png' }, back: { title: "apki cuteness😋❤️", text: "sach bata rha hu ksm se kabhi tere jaisi sundri ladki nhi dekhiii😭 TERI AANKHE UFFF!" }},
-    { front: { type: 'image', src: '/5.png' }, back: { title: 'My Wishes 💖', text: 'Hope you achieve your goals this year and keep growing with all the love you truly deserve!' }},
-    { front: { type: 'image', src: '/6.png' }, back: { title: 'Before You Go... 💫', text: 'Meri pyari bestfrienddd mere jigar ka tukda kya hi bolu ab pyari bachi hai tu merii🥹' }},
-    { front: { type: 'image', src: '/profile.jpg' }, back: { title: 'Thak toh nhi gyi?😭', text: "AGAIN I LOVE UH SO MUCHH, YOU'RE THE BESTTT UMAH 😭😭😭" }},
-    { front: { type: 'image', src: '/1.png' }, back: { type: 'backcover', title: 'With Love', subtitle: 'Always and Forever 💌' }},
-  ];
+  {
+    front: {
+      type: 'cover',
+      title: 'Happy Birthday Papa',
+      subtitle: 'A Small Book Filled With Love ❤️'
+    },
+    back: {
+      title: 'For You Papa',
+      text: 'There are so many things I don’t say out loud, but they truly matter ❤️'
+    }
+  },
+  {
+    front: { type: 'image', src: '/2.png' },
+    back: {
+      title: 'Your Presence',
+      text: 'Your presence always made things easier and safer for me, papa ❤️'
+    }
+  },
+  {
+    front: { type: 'image', src: '/3.png' },
+    back: {
+      title: 'Silent Strength',
+      text: 'Knowing you were there gave me confidence I didn’t even realise I had ❤️'
+    }
+  },
+  {
+    front: { type: 'image', src: '/4.png' },
+    back: {
+      title: 'Grateful Heart',
+      text: 'That quiet support of yours shaped me more than words ever could ❤️'
+    }
+  },
+  {
+    front: { type: 'image', src: '/5.png' },
+    back: {
+      title: 'Always Thankful',
+      text: 'It’s something I will always carry with me and be thankful for, papa ❤️'
+    }
+  },
+  {
+    front: { type: 'image', src: '/6.png' },
+    back: {
+      title: 'Unsaid Feelings',
+      text: 'I may not express it often, but your guidance means everything to me ❤️'
+    }
+  },
+  {
+    front: { type: 'image', src: '/profile.jpg' },
+    back: {
+      title: 'On Your Birthday',
+      text: 'Wishing you health, peace, and happiness today and always, papa ❤️'
+    }
+  },
+  {
+    front: { type: 'image', src: '/1.png' },
+    back: {
+      type: 'backcover',
+      title: 'With Love',
+      subtitle: 'Forever Grateful to You, Papa ❤️'
+    }
+  }
+];
 
   return (
     <>

@@ -153,7 +153,7 @@ const Home = () => {
           <div className="left">
             <div className="title">
               <div className="happy">Happy</div>
-              <div className="birthday">New Year!</div>
+              <div className="birthday">Birthday!</div>
             </div>
 
             <div className="date__of__birth">
@@ -161,7 +161,7 @@ const Home = () => {
             </div>
 
             <button id="btn__letter" onClick={handleMailClick}>
-              Open New Year Letter <i className="fa-solid fa-heart"></i>
+              Open Birthday Letter <i className="fa-solid fa-heart"></i>
             </button>
           </div>
 

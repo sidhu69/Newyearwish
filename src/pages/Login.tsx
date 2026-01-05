@@ -7,7 +7,7 @@ const Login = () => {
   const [isActive, setIsActive] = useState(false);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const navigate = useNavigate();
-  const secretCode = 'Jannat';
+  const secretCode = 'Papa';
 
   useEffect(() => {
     setTimeout(() => setIsActive(true), 200);
@@ -36,7 +36,7 @@ const Login = () => {
     const userInput = code.trim();
     if (userInput.toLowerCase() === secretCode.toLowerCase()) {
       setIsSubmitting(true);
-      setResult('🎆 Welcome to the New Year! 🎆');
+      setResult('🎉 Happy Birthday Papa 🎉');
       setTimeout(() => navigate('/home'), 500);
     } else {
       setResult("Oops! That's not the right name.");
@@ -195,16 +195,15 @@ const Login = () => {
           className={isActive ? 'active' : ''}
           onSubmit={handleSubmit}
         >
-          <h2>🎆 Happy New Year Baby 🎇</h2>
+          <h2>🎉 Happy Birthday Papa 🎂</h2>
           <label htmlFor="code">
-            Welcome to the New Year ✨<br />
-            Apna pyara sa naam type kr yaha par 💋
+            Please type here "Papa"
           </label>
           <input 
             type="text" 
             id="code" 
             name="code" 
-            placeholder="Type your name here..."
+            placeholder='Please type here "Papa"'
             value={code}
             onChange={(e) => setCode(e.target.value)}
             autoComplete="off"
@@ -213,7 +212,7 @@ const Login = () => {
             type="submit"
             onTouchEnd={handleSubmit}
           >
-            Press karo janeman😋💋
+            Tap to Unlock Your Surprise 🎁
           </button>
           <div id="result">{result}</div>
         </form>

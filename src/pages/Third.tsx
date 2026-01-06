@@ -38,7 +38,7 @@ setCurrentPage(prev => Math.min(pageCount, prev + 1));
 };
 
 const isBookOpen = currentPage > 0 && currentPage < pageCount;
-const bookTransform = isBookOpen ? 'translateX(70%) rotateX(10deg)' : 'rotateX(10deg)';
+const bookTransform = isBookOpen ? 'translateX(50%) rotateX(10deg)' : 'translateX(50%) rotateX(0deg)';
 
 const pages = [
 {

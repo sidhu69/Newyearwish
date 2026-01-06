@@ -35,7 +35,7 @@ jobs:
           cat > capacitor.config.json <<EOL
           {
             "appId": "com.ansh.newyearwish",
-            "appName": "NewYearWish",
+            "appName": "HB Papa",
             "webDir": "dist",
             "bundledWebRuntime": false
           }

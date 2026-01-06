@@ -243,7 +243,7 @@ const Home = () => {
               </p>
 
               <p style={{ fontSize: '1.3rem', marginTop: '15px' }}>
-                Tomorrow, 6th January, you turn 45. I’m grateful for you today
+                Today, 6th January, you've turned 45. I’m grateful for you today
                 and always, and Inshallah there’s a lot more life, memories, and
                 time ahead of us.
               </p>

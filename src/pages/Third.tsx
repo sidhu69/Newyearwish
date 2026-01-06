@@ -91,7 +91,7 @@ text: 'I may not express it often, but your guidance means everything to me ❤�
 front: { type: 'image', src: '/profile.jpg' },
 back: {
 title: 'On Your Birthday',
-text: 'Wishing you health, peace, and happiness today and always, papa ❤️'
+text: 'Wishing you health, peace, and happiness today and always, Forever Grateful to You, Papa ❤️'
 }
 },
 {
@@ -99,7 +99,7 @@ front: { type: 'image', src: '/1.png' },
 back: {
 type: 'backcover',
 title: 'With Love',
-subtitle: 'Forever Grateful to You, Papa ❤️'
+subtitle: 'By Mysha'
 }
 }
 ];

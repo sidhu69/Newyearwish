@@ -11,10 +11,9 @@ if (container) {
 for (let i = 0; i < 30; i++) {
 const heart = document.createElement('i');
 heart.className = 'fa-solid fa-heart';
-heart.style.left = ${Math.random() * 100}%;
-heart.style.animationDelay = ${Math.random() * 10}s;
-heart.style.fontSize = ${15 + Math.random() * 20}px;
-heart.style.animationDuration = ${10 + Math.random() * 15}s;
+heart.style.left = `${Math.random() * 100}%`;       // line 14
+heart.style.animationDelay = `${Math.random() * 10}s`; // line 15
+heart.style.fontSize = `${15 + Math.random() * 20}px`; // line 16
 container.appendChild(heart);
 }
 }

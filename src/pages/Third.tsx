@@ -38,7 +38,7 @@ const Third = () => {
   };
 
   const isBookOpen = currentPage > 0 && currentPage < pageCount;
-  const bookTransform = isBookOpen ? 'translateX(50%) rotateX(10deg)' : 'rotateX(10deg)';
+  const bookTransform = 'rotateX(10deg)';
 
   const pages = [
   {

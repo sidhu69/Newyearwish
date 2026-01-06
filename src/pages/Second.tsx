@@ -14,7 +14,7 @@ const Second = () => {
       { image: "/4.png", text: "Some moments with you stay in my heart forever, papa ❤️" },
       { image: "/3.png", text: "You’ve guided me, supported me, and helped me grow into a better version of myself ❤️" },
       { image: "/2.png", text: "I might not say it often, but your love and care mean the world to me ❤️" },
-      { image: "/6.png", text: "Tomorrow is your special day, happy birthday papa! Wishing you lots of happiness and love ❤️" }
+      { image: "/6.png", text: "Today is your special day, happy birthday papa! Wishing you lots of happiness and love ❤️" }
     ];
 
     let highestZ = 5;
